@@ -55,3 +55,68 @@ O administrador acessará sua área específica para gerenciar as sugestões dis
 - MySQL para o banco de dados.
 - Git e GitHub para o controle de versões e armazenamento do projeto.
 
+## 10. Estrutura do projeto
+
+O projeto está organizado em pastas para separar o front-end, o back-end, o banco de dados e a documentação.
+
+- **frontend:** arquivos HTML, CSS e JavaScript.
+- **backend:** arquivos responsáveis pelo funcionamento da API.
+- **controllers:** funções responsáveis pelas operações do sistema.
+- **routes:** definição das rotas da API.
+- **middlewares:** validação de autenticação e autorização.
+- **database:** conexão com o banco de dados.
+- **sql:** scripts de criação e organização do banco de dados.
+
+## 11. Banco de dados
+
+O NutriViva utiliza o MySQL para armazenar as informações. O banco de dados possui seis tabelas relacionadas:
+
+- usuarios
+- refeicoes
+- planejamentos
+- favoritos
+- refeicoes_consumidas
+- sugestoes
+
+As tabelas utilizam chaves primárias (PK) e chaves estrangeiras (FK) para estabelecer os relacionamentos entre os dados.
+
+## 12. Cadastro e autenticação
+
+O sistema possui cadastro de usuários e login integrados ao banco de dados.
+
+As senhas são protegidas utilizando a biblioteca bcryptjs, que realiza a criptografia por hash.
+
+A autenticação utiliza JWT (JSON Web Token), permitindo verificar a identidade dos usuários durante o acesso às rotas protegidas.
+
+## 13. Controle de acesso
+
+O sistema possui dois níveis de acesso:
+
+- **Usuário comum:** pode acessar as rotas que exigem autenticação.
+- **Administrador:** possui acesso às rotas exclusivas de administração.
+
+Foram desenvolvidos middlewares para verificar o token de autenticação e controlar as permissões de acesso.
+
+## 14. Testes realizados
+
+Os testes da API foram realizados utilizando o Thunder Client.
+
+Foram testados:
+
+- Cadastro de usuários.
+- Login de usuários.
+- Retorno do token JWT.
+- Acesso à rota de perfil com autenticação.
+- Bloqueio de acesso à rota administrativa para usuários comuns.
+- Acesso à rota administrativa com usuário administrador.
+
+## 15. Tecnologias utilizadas
+
+- HTML, CSS e JavaScript.
+- Node.js e Express.
+- MySQL e MySQL2.
+- bcryptjs.
+- JSON Web Token (JWT).
+- dotenv e cors.
+- Thunder Client.
+- Git e GitHub.
