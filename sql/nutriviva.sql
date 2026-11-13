@@ -1,8 +1,10 @@
-CREATE DATABASE nutriviva;
+CREATE DATABASE IF NOT EXISTS nutriviva
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
 
 USE nutriviva;
 
-CREATE TABLE usuarios (
+CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -12,12 +14,12 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios (nome, email, senha, tipo_usuario) VALUES
-('Ana Silva', 'ana@email.com', 'senha_exemplo_ana', 'comum'),
-('Lucas Santos', 'lucas@email.com', 'senha_exemplo_lucas', 'comum'),
-('Administrador', 'admin@nutriviva.com', 'senha_exemplo_admin', 'administrador');
+('Ana Silva', 'ana@email.com', '$2b$10$0adtFSkVEm7QBRAl8Yiu5uPUqSaIfFw88xzn4fLwdQgRLIHhaCmae', 'comum'),
+('Lucas Santos', 'lucas@email.com', '$2b$10$nXjMQXwZl5uaGNb2vtGuIeMXu/OdguZLuxZZ7OYGV1pD5mzrcq362', 'comum'),
+('Administrador', 'admin@nutriviva.com', '$2b$10$dZrP0ksJk82bXthgpuycH.NlpGoQ.w27io9RK8C1cpjs4YKaLwvf6', 'administrador');
 
 
-CREATE TABLE refeicoes (
+CREATE TABLE IF NOT EXISTS refeicoes (
     id_refeicao INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao TEXT,
@@ -31,10 +33,11 @@ INSERT INTO refeicoes (nome, descricao, categoria, horario_indicado) VALUES
 ('Arroz com legumes', 'Arroz acompanhado de legumes variados.', 'Almoço', 'Tarde'),
 ('Sanduíche natural', 'Sanduíche com vegetais e recheio de sua preferência.', 'Lanche', 'Tarde'),
 ('Sopa de legumes', 'Sopa preparada com legumes variados.', 'Jantar', 'Noite'),
-('Salada de frutas', 'Mistura de frutas frescas.', 'Lanche', 'Manhã');
+('Salada de frutas', 'Mistura de frutas frescas.', 'Lanche', 'Manhã'),
+('Suco verde detox', 'Suco refrescante de couve, limão, maçã e gengibre.', 'Bebida', 'Manhã');
 
 
-CREATE TABLE planejamentos (
+CREATE TABLE IF NOT EXISTS planejamentos (
     id_planejamento INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_refeicao INT NOT NULL,
@@ -43,10 +46,12 @@ CREATE TABLE planejamentos (
     observacoes TEXT,
 
     FOREIGN KEY (id_usuario)
-        REFERENCES usuarios(id_usuario),
+        REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE,
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
+        ON DELETE CASCADE
 );
 
 INSERT INTO planejamentos
@@ -57,17 +62,19 @@ INSERT INTO planejamentos
 (2, 4, '2026-11-03', 'Jantar', 'Planejamento do jantar.');
 
 
-CREATE TABLE favoritos (
+CREATE TABLE IF NOT EXISTS favoritos (
     id_favorito INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_refeicao INT NOT NULL,
     data_adicionado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (id_usuario)
-        REFERENCES usuarios(id_usuario),
+        REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE,
 
     FOREIGN KEY (id_refeicao)
-        REFERENCES refeicoes(id_refeicao),
+        REFERENCES refeicoes(id_refeicao)
+        ON DELETE CASCADE,
 
     UNIQUE (id_usuario, id_refeicao)
 );
@@ -79,7 +86,7 @@ INSERT INTO favoritos (id_usuario, id_refeicao) VALUES
 (2, 4);
 
 
-CREATE TABLE refeicoes_consumidas (
+CREATE TABLE IF NOT EXISTS refeicoes_consumidas (
     id_consumo INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_refeicao INT NOT NULL,
@@ -88,10 +95,12 @@ CREATE TABLE refeicoes_consumidas (
     observacoes TEXT,
 
     FOREIGN KEY (id_usuario)
-        REFERENCES usuarios(id_usuario),
+        REFERENCES usuarios(id_usuario)
+        ON DELETE CASCADE,
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
+        ON DELETE CASCADE
 );
 
 INSERT INTO refeicoes_consumidas
@@ -102,7 +111,7 @@ INSERT INTO refeicoes_consumidas
 (2, 4, '2026-10-29', 'Jantar', 'Jantar registrado.');
 
 
-CREATE TABLE sugestoes (
+CREATE TABLE IF NOT EXISTS sugestoes (
     id_sugestao INT AUTO_INCREMENT PRIMARY KEY,
     id_refeicao INT NOT NULL,
     titulo VARCHAR(100) NOT NULL,
@@ -111,6 +120,7 @@ CREATE TABLE sugestoes (
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
+        ON DELETE CASCADE
 );
 
 INSERT INTO sugestoes (id_refeicao, titulo, descricao, ativa) VALUES
@@ -118,16 +128,3 @@ INSERT INTO sugestoes (id_refeicao, titulo, descricao, ativa) VALUES
 (2, 'Ideia para o almoço', 'Confira esta opção de refeição com legumes.', TRUE),
 (3, 'Opção para o lanche', 'Veja esta sugestão de sanduíche natural.', TRUE),
 (5, 'Sugestão de lanche leve', 'Experimente uma salada de frutas.', TRUE);
-
-
-
-SELECT * FROM usuarios;
-SELECT * FROM refeicoes;
-SELECT * FROM planejamentos;
-SELECT * FROM favoritos;
-SELECT * FROM refeicoes_consumidas;
-SELECT * FROM sugestoes;
-
-
-
-SHOW TABLES;

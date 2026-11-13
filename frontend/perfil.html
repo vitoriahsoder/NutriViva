@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil | NutriViva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="topo">
+        <a href="index.html" class="logo">NutriViva</a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="refeicoes.html">Refeições</a>
+            <a href="planejamento.html">Planejamento</a>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="historico.html">Histórico</a>
+            <a href="perfil.html">Meu perfil</a>
+            <a href="#" id="botaoSairTopo">Sair</a>
+        </nav>
+    </header>
+
+    <main class="pagina-perfil">
+
+        <section class="perfil-intro">
+            <span>MINHA CONTA</span>
+            <h2>Meu perfil</h2>
+            <p>Consulte e atualize suas informações pessoais.</p>
+        </section>
+
+        <section class="cartao-perfil">
+
+            <div class="perfil-avatar">
+                <span>♡</span>
+            </div>
+
+            <h3 id="nomeExibido">Carregando...</h3>
+            <p id="emailExibido">Carregando...</p>
+
+            <div class="perfil-informacoes">
+                <div>
+                    <span>Tipo de conta</span>
+                    <strong id="tipoUsuario">Carregando...</strong>
+                </div>
+
+                <div>
+                    <span>Data de cadastro</span>
+                    <strong id="dataCadastro">Carregando...</strong>
+                </div>
+            </div>
+
+            <div class="perfil-formulario">
+                <h3>Editar informações</h3>
+
+                <form id="formPerfil">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" required>
+
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+
+                    <button type="submit">Salvar alterações</button>
+                </form>
+
+                <p id="mensagemPerfil"></p>
+            </div>
+
+            <button type="button" id="botaoSair" class="botao-sair">
+                Sair da conta
+            </button>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>NutriViva</h2>
+        <p>Alimentação, equilíbrio e qualidade de vida.</p>
+        <small>NutriViva © 2026</small>
+    </footer>
+
+    <script src="js/perfil.js"></script>
+
+</body>
+</html>

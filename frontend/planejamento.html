@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento | NutriViva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="topo">
+        <a href="index.html" class="logo">NutriViva</a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="refeicoes.html">Refeições</a>
+            <a href="planejamento.html">Planejamento</a>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="historico.html">Histórico</a>
+            <a href="perfil.html">Meu perfil</a>
+            <a href="#" id="botaoSair">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="secao-planejamento">
+            <h2>Meu planejamento semanal</h2>
+            <p>Organize suas refeições e prepare sua semana com mais praticidade.</p>
+
+            <form id="formPlanejamento">
+
+                <label for="refeicao">Escolha uma refeição:</label>
+                <select id="refeicao" required>
+                    <option value="">Selecione uma refeição</option>
+                </select>
+
+                <label for="dataRefeicao">Dia:</label>
+                <input type="date" id="dataRefeicao" required>
+
+                <label for="tipoRefeicao">Horário da refeição:</label>
+                <select id="tipoRefeicao" required>
+                    <option value="">Selecione</option>
+                    <option value="Café da manhã">Café da manhã</option>
+                    <option value="Lanche da manhã">Lanche da manhã</option>
+                    <option value="Almoço">Almoço</option>
+                    <option value="Lanche da tarde">Lanche da tarde</option>
+                    <option value="Jantar">Jantar</option>
+                    <option value="Ceia">Ceia</option>
+                </select>
+
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" placeholder="Adicione alguma observação..."></textarea>
+
+                <button type="submit">Adicionar ao planejamento</button>
+
+            </form>
+        </section>
+
+        <section class="lista-planejamento">
+            <h2>Minhas refeições planejadas</h2>
+            <div id="listaPlanejamento">
+                <p>Suas refeições planejadas aparecerão aqui.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>NutriViva</h2>
+        <p>Alimentação, equilíbrio e qualidade de vida.</p>
+        <small>NutriViva © 2026</small>
+    </footer>
+
+    <script src="js/planejamento.js"></script>
+</body>
+</html>

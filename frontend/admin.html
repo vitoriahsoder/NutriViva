@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração | NutriViva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topo">
+        <a href="index.html" class="logo">NutriViva</a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="refeicoes.html">Refeições</a>
+            <a href="planejamento.html">Planejamento</a>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="historico.html">Histórico</a>
+            <a href="perfil.html">Meu perfil</a>
+            <a href="#" id="botaoSair">Sair</a>
+        </nav>
+    </header>
+    <main class="admin-pagina">
+        <section class="admin-card">
+            <span class="sobretitulo">ÁREA ADMINISTRATIVA</span>
+            <h1>Gerencie o catálogo de refeições</h1>
+            <p>Cadastre novas opções ou edite e remova refeições existentes. As permissões também são verificadas pela API.</p>
+            <p id="mensagemAdmin" role="status">Verificando seu acesso…</p>
+            <a id="abrirCatalogo" class="botao-principal" href="refeicoes.html#areaAdministrador" hidden>Gerenciar refeições</a>
+        </section>
+    </main>
+    <footer>
+        <h2>NutriViva</h2>
+        <p>Alimentação, equilíbrio e qualidade de vida.</p>
+        <small>NutriViva © 2026</small>
+    </footer>
+    <script src="js/admin.js"></script>
+</body>
+</html>

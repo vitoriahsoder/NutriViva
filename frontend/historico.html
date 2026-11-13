@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico | NutriViva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="topo">
+        <a href="index.html" class="logo">NutriViva</a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="refeicoes.html">Refeições</a>
+            <a href="planejamento.html">Planejamento</a>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="historico.html">Histórico</a>
+            <a href="perfil.html">Meu perfil</a>
+            <a href="#" id="botaoSair">Sair</a>
+        </nav>
+    </header>
+
+    <main class="pagina-historico">
+
+        <section class="historico-intro">
+            <span>MINHA ROTINA</span>
+            <h2>Meu histórico</h2>
+            <p>Suas refeições registradas em um só lugar.</p>
+        </section>
+
+        <section class="historico-formulario">
+            <h3>Registrar refeição</h3>
+
+            <form id="formHistorico">
+
+                <label for="refeicao">Escolha a refeição</label>
+                <select id="refeicao" required>
+                    <option value="">Carregando refeições...</option>
+                </select>
+
+                <label for="dataConsumo">Data</label>
+                <input type="date" id="dataConsumo" required>
+
+                <label for="tipoRefeicao">Tipo de refeição</label>
+                <select id="tipoRefeicao" required>
+                    <option value="">Selecione</option>
+                    <option value="Café da manhã">Café da manhã</option>
+                    <option value="Lanche da manhã">Lanche da manhã</option>
+                    <option value="Almoço">Almoço</option>
+                    <option value="Lanche da tarde">Lanche da tarde</option>
+                    <option value="Jantar">Jantar</option>
+                    <option value="Ceia">Ceia</option>
+                </select>
+
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" rows="3" placeholder="Escreva alguma observação..."></textarea>
+
+                <button type="submit">Registrar refeição</button>
+
+            </form>
+
+            <p id="mensagemHistorico"></p>
+        </section>
+
+        <section class="historico-lista">
+            <h3>Minhas refeições registradas</h3>
+
+            <div id="listaHistorico">
+                <p>Carregando histórico...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <h2>NutriViva</h2>
+        <p>Alimentação, equilíbrio e qualidade de vida.</p>
+        <small>NutriViva © 2026</small>
+    </footer>
+
+    <script src="js/historico.js"></script>
+
+</body>
+</html>

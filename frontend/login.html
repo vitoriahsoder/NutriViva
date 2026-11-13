@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | NutriViva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="topo">
+        <a href="index.html" class="logo">NutriViva</a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="cadastro.html">Criar conta</a>
+        </nav>
+    </header>
+
+    <main class="pagina-login">
+        <section class="login-imagem">
+            <div>
+                <span>SEJA BEM-VINDO AO NUTRIVIVA</span>
+                <h1>Cuide da sua alimentação. <em>Viva melhor.</em></h1>
+                <p>Organize suas refeições e descubra novas possibilidades para sua rotina.</p>
+            </div>
+        </section>
+
+        <section class="login-formulario">
+            <div class="login-card">
+                <span>ACESSO À PLATAFORMA</span>
+                <h2>Entre na sua conta</h2>
+                <p>Informe seus dados para continuar.</p>
+
+                <form id="formLogin">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu e-mail" required>
+
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+                    <button type="submit">Entrar na conta</button>
+
+                    <p id="mensagemLogin"></p>
+                </form>
+
+                <p class="link-cadastro">
+                    Ainda não tem conta?
+                    <a href="cadastro.html">Cadastre-se</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

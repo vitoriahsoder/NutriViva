@@ -32,21 +32,21 @@ Desenvolver uma plataforma que permita planejar refeições, consultar sugestõe
 
 - Planejamento semanal de refeições.
 - Cadastro, edição, consulta e exclusão de refeições.
-- Sugestões de refeições.
+- Catálogo pesquisável de refeições.
 - Registro alimentar.
 - Lista de favoritos.
-- Área administrativa para gerenciar sugestões.
+- Área administrativa para gerenciar refeições.
 
 ## 7. Tipos de usuários
 
 - **Usuário comum:** poderá organizar suas refeições, consultar sugestões e visualizar seus registros.
-- **Administrador:** poderá cadastrar, editar e excluir sugestões disponibilizadas na plataforma.
+- **Administrador:** poderá cadastrar, editar e excluir refeições do catálogo.
 
 ## 8. Fluxo básico do sistema
 
 O usuário acessará a plataforma, entrará em sua área pessoal, visualizará o painel inicial e poderá planejar suas refeições, consultar sugestões e registrar os alimentos consumidos.
 
-O administrador acessará sua área específica para gerenciar as sugestões disponíveis.
+O administrador acessará sua área específica para gerenciar as refeições do catálogo.
 
 ## 9. Tecnologias previstas
 
@@ -120,3 +120,23 @@ Foram testados:
 - dotenv e cors.
 - Thunder Client.
 - Git e GitHub.
+
+## Iniciar o projeto localmente
+
+1. Inicie o MySQL e confirme as configurações de conexão. O schema utilizado pelo projeto é `nutriviva`.
+2. Na pasta `backend`, copie `.env.example` para `.env` e preencha usuário, senha, porta do MySQL e um segredo JWT privado. Não compartilhe nem envie o arquivo `.env`.
+3. No terminal, entre na pasta `backend` e execute `npm install` (na primeira configuração) e `npm run start`.
+4. Abra a pasta `frontend` no VS Code e inicie `index.html` com a extensão Live Server. O backend usa a porta 3000 por padrão; se alterar `PORT`, atualize também a URL da API nos arquivos JavaScript do frontend.
+
+O script `sql/nutriviva.sql` cria e preenche as tabelas para uma instalação nova. Não o execute sobre uma base que já contém dados sem revisar os comandos e os registros iniciais.
+
+## Fluxos disponíveis
+
+- Crie uma conta em `cadastro.html` e entre em `login.html`.
+- Navegue pelo catálogo para pesquisar, filtrar e favoritar refeições.
+- Use Planejamento para adicionar, editar e remover itens da semana.
+- Use Histórico para registrar refeições consumidas e consultar os registros agrupados por data.
+- Atualize seus dados em Meu perfil. A opção Sair encerra a sessão no navegador.
+- Contas de administrador gerenciam o catálogo em Refeições; o backend confirma a permissão em cada operação administrativa.
+
+As páginas privadas usam o token de login guardado na sessão do navegador. Se a API retornar 401, entre novamente.

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refeições | NutriViva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="topo">
+        <a href="index.html" class="logo">NutriViva</a>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="refeicoes.html">Refeições</a>
+            <a href="planejamento.html">Planejamento</a>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="historico.html">Histórico</a>
+            <a href="perfil.html">Meu perfil</a>
+            <a href="admin.html" id="linkAdmin" hidden>Administração</a>
+            <a href="#" id="botaoSair">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cabecalho-refeicoes">
+            <span>DESCUBRA NOVOS SABORES</span>
+            <h1>Suas refeições, <em>seu equilíbrio.</em></h1>
+            <p>Explore diferentes opções e organize sua alimentação.</p>
+        </section>
+
+        <section class="catalogo">
+            <div class="filtros">
+                <input
+                    type="search"
+                    id="pesquisaRefeicao"
+                    placeholder="Pesquisar refeição..."
+                >
+
+                <select id="filtroCategoria">
+                    <option value="">Todas as categorias</option>
+                    <option value="Café da manhã">Café da manhã</option>
+                    <option value="Almoço">Almoço</option>
+                    <option value="Lanche">Lanche</option>
+                    <option value="Jantar">Jantar</option>
+                    <option value="Bebida">Bebida</option>
+                </select>
+            </div>
+
+            <div id="listaRefeicoes">
+                <p>Carregando refeições...</p>
+            </div>
+        </section>
+
+        <section class="formulario" id="areaAdministrador" hidden>
+            <h2>Gerenciar refeições</h2>
+            <p>Cadastre uma nova opção no catálogo.</p>
+
+            <form id="formRefeicao">
+                <label for="nome">Nome da refeição</label>
+                <input type="text" id="nome" required>
+
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao"></textarea>
+
+                <label for="categoria">Categoria</label>
+                <select id="categoria" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Café da manhã">Café da manhã</option>
+                    <option value="Almoço">Almoço</option>
+                    <option value="Lanche">Lanche</option>
+                    <option value="Jantar">Jantar</option>
+                    <option value="Bebida">Bebida</option>
+                </select>
+
+                <label for="horario_indicado">Horário indicado</label>
+                <input type="text" id="horario_indicado">
+
+                <button type="submit">Cadastrar refeição</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <h2>NutriViva</h2>
+        <p>Alimentação, equilíbrio e qualidade de vida.</p>
+        <small>NutriViva © 2026</small>
+    </footer>
+
+    <script src="js/refeicoes.js"></script>
+</body>
+</html>
