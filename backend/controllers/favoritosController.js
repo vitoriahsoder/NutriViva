@@ -36,7 +36,7 @@ export async function listarFavoritos(req, res) {
 export async function adicionarFavorito(req, res) {
     try {
         const id_usuario = req.usuario.id_usuario;
-        const { id_refeicao } = req.body;
+        const { id_refeicao } = req.body || {};
 
         if (!id_refeicao) {
             return res.status(400).json({

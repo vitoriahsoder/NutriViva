@@ -1,6 +1,12 @@
 const API_URL = "http://localhost:3000";
 const token = sessionStorage.getItem("token");
-const usuario = JSON.parse(sessionStorage.getItem("usuario") || "null");
+let usuario = null;
+
+try {
+    usuario = JSON.parse(sessionStorage.getItem("usuario") || "null");
+} catch {
+    sessionStorage.removeItem("usuario");
+}
 const mensagemAdmin = document.getElementById("mensagemAdmin");
 
 function encerrarSessao() {

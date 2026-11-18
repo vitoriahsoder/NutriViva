@@ -129,4 +129,4 @@ botaoSair?.addEventListener("click", (evento) => {
 });
 
 // INICIAR
-carregarFavoritos();
+if (token) carregarFavoritos();

@@ -1,6 +1,5 @@
 import { pool } from "../database/conexao.js";
-
-const DATA_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+import { dataCalendarioValida } from "../utils/validarData.js";
 
 // Registrar uma refeição consumida
 export async function cadastrarHistorico(req, res) {
@@ -12,15 +11,18 @@ export async function cadastrarHistorico(req, res) {
             data_consumo,
             tipo_refeicao,
             observacoes
-        } = req.body;
+        } = req.body || {};
 
-        if (!id_refeicao || !data_consumo || !tipo_refeicao) {
+        const idRefeicao = Number(id_refeicao);
+        const tipoNormalizado = typeof tipo_refeicao === "string" ? tipo_refeicao.trim() : "";
+
+        if (!Number.isSafeInteger(idRefeicao) || idRefeicao < 1 || !tipoNormalizado) {
             return res.status(400).json({
                 mensagem: "Preencha a refeição, a data e o tipo."
             });
         }
 
-        if (!DATA_REGEX.test(String(data_consumo))) {
+        if (!dataCalendarioValida(data_consumo)) {
             return res.status(400).json({
                 mensagem: "Informe a data no formato AAAA-MM-DD."
             });
@@ -32,10 +34,10 @@ export async function cadastrarHistorico(req, res) {
             VALUES (?, ?, ?, ?, ?)`,
             [
                 id_usuario,
-                id_refeicao,
+                idRefeicao,
                 data_consumo,
-                tipo_refeicao.trim(),
-                observacoes ? observacoes.trim() : null
+                tipoNormalizado,
+                typeof observacoes === "string" ? observacoes.trim() || null : null
             ]
         );
 

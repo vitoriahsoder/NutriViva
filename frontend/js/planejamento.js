@@ -258,5 +258,7 @@ if (botaoSair) {
     });
 }
 
-carregarRefeicoes();
-carregarPlanejamento();
+if (token) {
+    carregarRefeicoes();
+    carregarPlanejamento();
+}

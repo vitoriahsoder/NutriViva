@@ -43,10 +43,10 @@ app.use((req, res) => {
 });
 
 app.use((erro, req, res, next) => {
-    console.error("Erro não tratado na API:", erro);
     const status = Number.isInteger(erro.status) ? erro.status : 500;
+    if (status >= 500) console.error("Erro não tratado na API:", erro);
     const mensagem = status === 400
-        ? "O corpo da requisição contém JSON inválido."
+        ? "Corpo da requisição inválido. Envie um objeto JSON válido."
         : "Erro interno no servidor.";
     res.status(status).json({ mensagem });
 });

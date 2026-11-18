@@ -62,10 +62,10 @@
 
             <form id="formRefeicao">
                 <label for="nome">Nome da refeição</label>
-                <input type="text" id="nome" required>
+                <input type="text" id="nome" required maxlength="100">
 
                 <label for="descricao">Descrição</label>
-                <textarea id="descricao"></textarea>
+                <textarea id="descricao" maxlength="5000"></textarea>
 
                 <label for="categoria">Categoria</label>
                 <select id="categoria" required>
@@ -78,7 +78,7 @@
                 </select>
 
                 <label for="horario_indicado">Horário indicado</label>
-                <input type="text" id="horario_indicado">
+                <input type="text" id="horario_indicado" maxlength="50">
 
                 <button type="submit">Cadastrar refeição</button>
             </form>

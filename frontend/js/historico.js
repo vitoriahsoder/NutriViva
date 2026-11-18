@@ -10,6 +10,13 @@ const mensagem = document.getElementById("mensagemHistorico");
 const botaoSair = document.getElementById("botaoSair");
 
 async function lerResposta(resposta) {
+    if (resposta.status === 401) {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("usuario");
+        window.location.replace("login.html");
+        throw new Error("Sua sessão expirou. Entre novamente.");
+    }
+
     const texto = await resposta.text();
     const tipo = resposta.headers.get("content-type") || "";
 

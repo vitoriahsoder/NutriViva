@@ -1,6 +1,5 @@
 import { pool } from "../database/conexao.js";
-
-const DATA_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+import { dataCalendarioValida } from "../utils/validarData.js";
 
 // Cadastrar uma refeição no planejamento
 export async function cadastrarPlanejamento(req, res) {
@@ -11,15 +10,18 @@ export async function cadastrarPlanejamento(req, res) {
             data_refeicao,
             tipo_refeicao,
             observacoes
-        } = req.body;
+        } = req.body || {};
 
-        if (!id_refeicao || !data_refeicao || !tipo_refeicao) {
+        const idRefeicao = Number(id_refeicao);
+        const tipoNormalizado = typeof tipo_refeicao === "string" ? tipo_refeicao.trim() : "";
+
+        if (!Number.isSafeInteger(idRefeicao) || idRefeicao < 1 || !tipoNormalizado) {
             return res.status(400).json({
                 mensagem: "Preencha a refeição, a data e o horário."
             });
         }
 
-        if (!DATA_REGEX.test(String(data_refeicao))) {
+        if (!dataCalendarioValida(data_refeicao)) {
             return res.status(400).json({
                 mensagem: "Informe a data no formato AAAA-MM-DD."
             });
@@ -31,10 +33,10 @@ export async function cadastrarPlanejamento(req, res) {
             VALUES (?, ?, ?, ?, ?)`,
             [
                 id_usuario,
-                id_refeicao,
+                idRefeicao,
                 data_refeicao,
-                tipo_refeicao.trim(),
-                observacoes ? observacoes.trim() : null
+                tipoNormalizado,
+                typeof observacoes === "string" ? observacoes.trim() || null : null
             ]
         );
 
@@ -103,21 +105,33 @@ export async function editarPlanejamento(req, res) {
             data_refeicao,
             tipo_refeicao,
             observacoes
-        } = req.body;
+        } = req.body || {};
 
-        if (!id_refeicao || !data_refeicao || !tipo_refeicao) {
+        const idRefeicao = Number(id_refeicao);
+        const tipoNormalizado = typeof tipo_refeicao === "string" ? tipo_refeicao.trim() : "";
+
+        if (!Number.isSafeInteger(idRefeicao) || idRefeicao < 1 || !tipoNormalizado) {
             return res.status(400).json({
                 mensagem: "Preencha a refeição, a data e o horário."
             });
         }
 
-        if (!DATA_REGEX.test(String(data_refeicao))) {
+        if (!dataCalendarioValida(data_refeicao)) {
             return res.status(400).json({
                 mensagem: "Informe a data no formato AAAA-MM-DD."
             });
         }
 
-        const [resultado] = await pool.query(
+        const [existentes] = await pool.query(
+            "SELECT id_planejamento FROM planejamentos WHERE id_planejamento = ? AND id_usuario = ?",
+            [id, id_usuario]
+        );
+
+        if (existentes.length === 0) {
+            return res.status(404).json({ mensagem: "Planejamento não encontrado." });
+        }
+
+        await pool.query(
             `UPDATE planejamentos
             SET id_refeicao = ?,
                 data_refeicao = ?,
@@ -126,20 +140,14 @@ export async function editarPlanejamento(req, res) {
             WHERE id_planejamento = ?
             AND id_usuario = ?`,
             [
-                id_refeicao,
+                idRefeicao,
                 data_refeicao,
-                tipo_refeicao.trim(),
-                observacoes ? observacoes.trim() : null,
+                tipoNormalizado,
+                typeof observacoes === "string" ? observacoes.trim() || null : null,
                 id,
                 id_usuario
             ]
         );
-
-        if (resultado.affectedRows === 0) {
-            return res.status(404).json({
-                mensagem: "Planejamento não encontrado."
-            });
-        }
 
         return res.status(200).json({
             mensagem: "Planejamento atualizado com sucesso!"

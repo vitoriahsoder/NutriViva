@@ -47,11 +47,11 @@ CREATE TABLE IF NOT EXISTS planejamentos (
 
     FOREIGN KEY (id_usuario)
         REFERENCES usuarios(id_usuario)
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
 );
 
 INSERT INTO planejamentos
@@ -70,11 +70,11 @@ CREATE TABLE IF NOT EXISTS favoritos (
 
     FOREIGN KEY (id_usuario)
         REFERENCES usuarios(id_usuario)
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
 
     UNIQUE (id_usuario, id_refeicao)
 );
@@ -96,11 +96,11 @@ CREATE TABLE IF NOT EXISTS refeicoes_consumidas (
 
     FOREIGN KEY (id_usuario)
         REFERENCES usuarios(id_usuario)
-        ON DELETE CASCADE,
+        ON DELETE RESTRICT,
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
 );
 
 INSERT INTO refeicoes_consumidas
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS sugestoes (
 
     FOREIGN KEY (id_refeicao)
         REFERENCES refeicoes(id_refeicao)
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
 );
 
 INSERT INTO sugestoes (id_refeicao, titulo, descricao, ativa) VALUES

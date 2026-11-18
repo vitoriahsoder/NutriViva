@@ -5,9 +5,10 @@ import jwt from "jsonwebtoken";
 // CADASTRAR USUÁRIO
 export async function cadastrarUsuario(req, res) {
     try {
-        const nomeInformado = typeof req.body.nome === "string" ? req.body.nome.trim() : "";
-        const email = typeof req.body.email === "string" ? req.body.email.trim().toLowerCase() : "";
-        const senha = typeof req.body.senha === "string" ? req.body.senha : "";
+        const corpo = req.body && typeof req.body === "object" ? req.body : {};
+        const nomeInformado = typeof corpo.nome === "string" ? corpo.nome.trim() : "";
+        const email = typeof corpo.email === "string" ? corpo.email.trim().toLowerCase() : "";
+        const senha = typeof corpo.senha === "string" ? corpo.senha : "";
 
         if (!nomeInformado || !email || !senha) {
             return res.status(400).json({
@@ -15,7 +16,7 @@ export async function cadastrarUsuario(req, res) {
             });
         }
 
-        if (nomeInformado.length < 2 || nomeInformado.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || senha.length < 6) {
+        if (nomeInformado.length < 2 || nomeInformado.length > 100 || email.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || senha.length < 6) {
             return res.status(400).json({
                 mensagem: "Informe um nome válido, um e-mail válido e uma senha com pelo menos 6 caracteres."
             });
@@ -75,8 +76,9 @@ export async function listarUsuarios(req, res) {
 // FAZER LOGIN
 export async function fazerLogin(req, res) {
     try {
-        const email = typeof req.body.email === "string" ? req.body.email.trim().toLowerCase() : "";
-        const senha = typeof req.body.senha === "string" ? req.body.senha : "";
+        const corpo = req.body && typeof req.body === "object" ? req.body : {};
+        const email = typeof corpo.email === "string" ? corpo.email.trim().toLowerCase() : "";
+        const senha = typeof corpo.senha === "string" ? corpo.senha : "";
 
         if (!email || !senha) {
             return res.status(400).json({
@@ -170,8 +172,9 @@ export async function consultarPerfil(req, res) {
 export async function atualizarPerfil(req, res) {
     try {
         const id_usuario = req.usuario.id_usuario;
-        const nomeInformado = typeof req.body.nome === "string" ? req.body.nome.trim() : "";
-        const email = typeof req.body.email === "string" ? req.body.email.trim().toLowerCase() : "";
+        const corpo = req.body && typeof req.body === "object" ? req.body : {};
+        const nomeInformado = typeof corpo.nome === "string" ? corpo.nome.trim() : "";
+        const email = typeof corpo.email === "string" ? corpo.email.trim().toLowerCase() : "";
 
         if (!nomeInformado || !email) {
             return res.status(400).json({
@@ -179,7 +182,7 @@ export async function atualizarPerfil(req, res) {
             });
         }
 
-        if (nomeInformado.length < 2 || nomeInformado.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (nomeInformado.length < 2 || nomeInformado.length > 100 || email.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             return res.status(400).json({ mensagem: "Informe um nome e um e-mail válidos." });
         }
 

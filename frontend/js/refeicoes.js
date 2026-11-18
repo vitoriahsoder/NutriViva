@@ -1,6 +1,12 @@
 const API_URL = "http://localhost:3000";
 const token = sessionStorage.getItem("token");
-const usuario = JSON.parse(sessionStorage.getItem("usuario") || "null");
+let usuario = null;
+
+try {
+    usuario = JSON.parse(sessionStorage.getItem("usuario") || "null");
+} catch {
+    sessionStorage.removeItem("usuario");
+}
 
 const listaRefeicoes = document.getElementById("listaRefeicoes");
 const pesquisaRefeicao = document.getElementById("pesquisaRefeicao");
@@ -267,7 +273,7 @@ async function editarRefeicao(refeicao) {
 }
 
 async function excluirRefeicao(id) {
-    if (!confirm("Excluir esta refeição? Ela também será removida de planejamentos, favoritos e histórico associados.")) return;
+    if (!confirm("Excluir esta refeição? Se ela estiver em uso, a API bloqueará a exclusão para preservar os registros.")) return;
     try {
         const resposta = await fetch(`${API_URL}/refeicoes/${id}`, {
             method: "DELETE",
@@ -295,4 +301,4 @@ if (botaoSair) {
     });
 }
 
-carregarRefeicoes();
+if (token && usuario) carregarRefeicoes();
